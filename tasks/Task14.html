@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Task-8</title>
+    <style>
+        body {
+            background: radial-gradient(circle at 82.8% 5.3%, rgb(255, 237, 216) 0%, rgb(255, 208, 253) 90%);
+        }
+
+        h1 {
+            color: blue;
+            font-size: 1.6em;
+            text-align: center;
+        }
+
+        input {
+            padding: 2px;
+        }
+
+        #submit {
+            background-color: red;
+            border-radius: 25px;
+            padding: 5px 45px;
+            color: white;
+            font-weight: bold;
+            font-size: 22px;
+            text-align: center;
+            margin-left: 40%;
+        }
+    </style>
+    <script>
+        function validate() {
+            const fname = document.getElementById("fname").value;
+            const lname = document.getElementById("lname").value;
+            const email = document.getElementById("email").value;
+            const pwd = document.getElementById("pwd").value;
+            const repwd = document.getElementById("repwd").value;
+            const age = parseInt(document.getElementById("age").value);
+            const phno = document.getElementById("phno").value;
+            const addr = document.getElementById("addr").value;
+            const state = document.getElementById("state").value;
+            var cnt = 0;
+
+            function setMessage(elementId, message, color) {
+                const element = document.getElementById(elementId);
+                element.innerText = message;
+                element.style.color = color;
+            }
+
+            if (fname.length < 4) {
+                cnt++;
+                setMessage("fnamemsg", "POOR", "red");
+            } else {
+                setMessage("fnamemsg", "STRONG", "lightgreen");
+            }
+
+            if (lname.length < 4) {
+                cnt++;
+                setMessage("lnamemsg", "POOR", "red");
+            } else {
+                setMessage("lnamemsg", "STRONG", "lightgreen");
+            }
+
+            if (!email.match(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/)) {
+                cnt++;
+                setMessage("emailmsg", "POOR", "red");
+            } else {
+                setMessage("emailmsg", "STRONG", "lightgreen");
+            }
+
+            if (!pwd.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/)) {
+                cnt++;
+                setMessage("pwdmsg", "POOR", "red");
+            } else {
+                if (pwd.length < 14) {
+                    setMessage("pwdmsg", "MEDIUM", "lightblue");
+                } else {
+                    setMessage("pwdmsg", "STRONG", "lightgreen");
+                }
+            }
+
+            if (repwd.length === 0 || pwd !== repwd) {
+                cnt++;
+                setMessage("repwdmsg", "POOR OR MISMATCH", "red");
+            } else {
+                setMessage("repwdmsg", "STRONG", "lightgreen");
+            }
+
+            if (!(age > 0 && age < 150)) {
+                cnt++;
+                setMessage("agemsg", "POOR", "red");
+            } else {
+                setMessage("agemsg", "STRONG", "lightgreen");
+            }
+
+            if (!phno.match(/^\d{10}$/)) {
+                cnt++;
+                setMessage("phnomsg", "POOR", "red");
+            } else {
+                setMessage("phnomsg", "STRONG", "lightgreen");
+            }
+
+            if (addr.length === 0) {
+                cnt++;
+                setMessage("addrmsg", "POOR", "red");
+            } else {
+                setMessage("addrmsg", "STRONG", "lightgreen");
+            }
+
+            if (state.length < 3) {
+                cnt++;
+                setMessage("statemsg", "POOR", "red");
+            } else {
+                setMessage("statemsg", "STRONG", "lightgreen");
+            }
+
+            if (cnt > 0) {
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>Registration form</h1>
+    <form action="index.html" onsubmit="return validate()">
+        <table cellspacing="10px" align="center">
+            <tr><th>First Name</th><td><input type="text" name="fname" id="fname" size="76"></td><td id="fnamemsg"></td></tr>
+            <tr><th>Last Name</th><td><input type="text" name="lname" id="lname" size="76"></td><td id="lnamemsg"></td></tr>
+            <tr><th>Email</th><td><input type="text" name="email" id="email" size="76"></td><td id="emailmsg"></td></tr>
+            <tr><th>Password</th><td><input type="password" name="pwd" id="pwd" size="76"></td><td id="pwdmsg"></td></tr>
+            <tr><th>Re-enter Password</th><td><input type="password" name="repwd" id="repwd" size="76"></td><td id="repwdmsg"></td></tr>
+            <tr><th>Gender</th><td><input type="radio" name="gender" value="Male" checked="checked">Male <br><input type="radio" name="gender" value="Female">Female</td><td id="gendermsg"></td></tr>
+            <tr><th>Age</th><td><input type="text" name="age" id="age" size="76"></td><td id="agemsg"></td></tr>
+            <tr><th>Phone Number</th><td><input type="text" name="phno" id="phno" size="76"></td><td id="phnomsg"></td></tr>
+            <tr><th>Address</th><td><textarea name="addr" id="addr" cols="72" rows="6"></textarea></td><td id="addrmsg"></td></tr>
+            <tr><th>State</th><td><input type="text" name="state" id="state" size="76"></td><td id="statemsg"></td></tr>
+            <tr><th>Country</th><td><select name="country" id="country">
+                <option value="def">Choose your country</option>
+                <option value="India">India</option>
+                <option value="USA">USA</option>
+                <option value="Japan">Japan</option>
+            </select></td><td></td></tr>
+            <tr><th>Languages known</th><td><input type="checkbox">English <input type="checkbox">Kannada <input type="checkbox">Hindi <input type="checkbox">Telugu</td><td></td></tr>
+            <tr><td colspan="3"><input type="checkbox"> Hereby I declare all the given details are true</td></tr>
+            <tr><td colspan="2" align="right">Log in to <a href="https://ethnus.com/">Ethnus</a> website</td><td></td></tr>
+            <tr><td colspan="3"><input type="submit" name="submit" id="submit" value="Register"></td></tr>
+        </table>
+    </form>
+</body>
+<br><br><br>
+    <a href="Task13.html">Go back to Task 13</a><br>
+    <a href="index.html">Go back to Main Page</a><br>
+
+
+</html>

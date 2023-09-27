@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Task-7</title>
+    <style>
+        h1, div {
+            text-align: center;
+        }
+        
+        h1 {
+            color: rgb(2, 2, 109);
+        }
+        
+        img {
+            padding-top: 100px;
+            animation: move 4s linear infinite;
+            animation-play-state: paused;
+        }
+        
+        @keyframes move {
+            0% {
+                padding-left: 0%;
+            }
+            100% {
+                padding-left: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img id="train" src="train.jpg" alt="train" height="200px">
+    <div style="width: 100%; height: 5px;"></div>
+    <h1>Click the following buttons to handle animation</h1>
+    <div>
+        <button onclick="toggleAnimation()">Start</button>
+        <button onclick="toggleAnimation()">Stop</button>
+    </div>
+
+    <script>
+        var animationPaused = true;
+
+        function toggleAnimation() {
+            var train = document.getElementById("train");
+            var buttons = document.getElementsByTagName("button");
+
+            if (animationPaused) {
+                train.style.animationPlayState = "running";
+                buttons[0].textContent = "Stop";
+                animationPaused = false;
+            } else {
+                train.style.animationPlayState = "paused";
+                buttons[0].textContent = "Start";
+                animationPaused = true;
+            }
+        }
+    </script>
+</body>
+<br><br><br>
+    <a href="Task12.html">Go back to Task 12</a><br>
+    <a href="Task14.html">Proceed to Task 14</a><br>
+    <a href="index.html">Go back to Main Page</a><br>
+
+</html>
